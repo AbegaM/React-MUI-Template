@@ -1,0 +1,16 @@
+{
+  "name": "scrumify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js", 
+    "dev": "nodemon index.js",
+    "backend": "nodemon index.js",
+    "frontend": "npm run start --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
