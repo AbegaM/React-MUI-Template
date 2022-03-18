@@ -8,11 +8,12 @@ import {
   Checkbox,
   Grid,
   Link,
+  Container,
 } from "@mui/material";
 
 export default function Signin() {
   return (
-    <div>
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -71,24 +72,26 @@ export default function Signin() {
               </Link>
             </Grid>
           </Grid>
-        </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Button type="button" fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mt: 2, mb: 0.5 }}
+          >
             Signin With Github
           </Button>
 
-          <Button type="button" variant="outlined" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mt: 0.5, mb: 1 }}
+          >
             Signin With Google
           </Button>
         </Box>
       </Box>
-    </div>
+    </Container>
   );
 }
