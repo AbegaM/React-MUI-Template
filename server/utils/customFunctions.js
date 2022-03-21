@@ -28,9 +28,14 @@ const comparePassword = (plainTextPassword, hashedPassword) => {
 
 const generateToken = (data, expTime) => {
   return new Promise((resolve, reject) => {
-    jwt.sign({ data }, env.server.secret, { expiresIn: expTime }, (err, token) => {
-      resolve(`Bearer ${token}`);
-    });
+    jwt.sign(
+      { data },
+      env.server.secret,
+      { expiresIn: expTime },
+      (err, token) => {
+        resolve(`Bearer ${token}`);
+      }
+    );
   });
 };
 
@@ -67,10 +72,18 @@ const checkAuthorization = async (bearerToken) => {
   });
 };
 
+const isFieldInvalid = (field) => {
+  if (field === undefined || field === "" || field === null) {
+    return true;
+  }
+  return false;
+};
+
 module.exports = {
   generateToken,
   hashPassword,
   comparePassword,
   getUserDataFromToken,
   checkAuthorization,
+  isFieldInvalid,
 };

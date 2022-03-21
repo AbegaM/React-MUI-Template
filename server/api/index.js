@@ -31,6 +31,8 @@ const makeHttpRequest = (controller) => {
 };
 
 router.get("/test", makeHttpRequest(service.testApi))
+router.post("/auth/signup", makeHttpRequest(service.signUp))
+router.post("/auth/signin", makeHttpRequest(service.signIn))
 router.get("/auth/signup/github", makeHttpRequest(service.signupWithGithub));
 router.get("/auth/signin/github", makeHttpRequest(service.signinWithGithub));
 router.get("/auth/callback/github", makeHttpRequest(service.githubCallback));
