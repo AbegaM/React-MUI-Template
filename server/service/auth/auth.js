@@ -20,9 +20,13 @@ const signIn = async ({ data, query }) => {
 
   const token = await utils.generateToken(
     { id: user._id, email: user.email },
-    "12H"
+    "1H"
   );
-  return { action: "send", data: { token: `Bearer ${token}` } };
+  return {
+    action: "send",
+    data: { token: token },
+    message: "User logged in successfully",
+  };
 };
 
 const signUp = async ({ data, query }) => {
@@ -33,6 +37,10 @@ const signUp = async ({ data, query }) => {
   }
 
   const result = await db.save(userData);
-  return { action: "send", data: { message: "User registered successfully" } };
+  return {
+    action: "send",
+    message: "User registered successfully",
+    data: [],
+  };
 };
 module.exports = { signIn, signUp };

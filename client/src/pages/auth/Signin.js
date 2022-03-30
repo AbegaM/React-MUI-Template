@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -11,7 +12,35 @@ import {
   Container,
 } from "@mui/material";
 
+import api from "../../api";
+
 export default function Signin() {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({ email: "", password: "" });
+
+  const handleChange = (event) => {
+    setUserData({ ...userData, [event.target.name]: event.target.value });
+  };
+
+  const clearStateData = () => {
+    setUserData({ email: "", password: "" });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const result = await api.signIn(userData);
+    if (result.status === 200) {
+      const token = result.data.data.token;
+      localStorage.setItem(
+        "scrumify-token",
+        JSON.stringify({ isAuthenticated: true, token })
+      );
+      navigate("/");
+    } else {
+      alert(result.data.message);
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -25,7 +54,7 @@ export default function Signin() {
         <Typography component="h1" variant="h5">
           Signin
         </Typography>
-        <Box component="form" sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -35,6 +64,7 @@ export default function Signin() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -45,6 +75,7 @@ export default function Signin() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

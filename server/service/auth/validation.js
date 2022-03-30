@@ -21,7 +21,7 @@ const validateSignUpData = async (data) => {
     throw new Error("Email is required");
   } else if (utils.isFieldInvalid(data.password)) {
     throw new Error("Password is required");
-  } else if (data.password.length < 0) {
+  } else if (data.password.length < 8) {
     throw new Error("Password needs to be more than 8 charachters");
   }
 
