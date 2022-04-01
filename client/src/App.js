@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { Route, Routes, BrowserRouter, useNavigate } from "react-router-dom";
+import React from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
-//import jwt from "jsonwebtoken"
+import {} from "history";
 
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
@@ -11,36 +11,14 @@ import Task from "./pages/Task";
 import User from "./pages/User";
 import Role from "./pages/Role";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
-
-const isTokenExpired = () => {
-  const bearerToken = localStorage.getItem("scrumify-token");
-  if (bearerToken) {
-    const token = bearerToken.split(" ")[1];
-    const decodedToken = JSON.parse(atob(token.split(".")[1]));
-    const expirationTime = decodedToken.exp * 1000 - 60000;
-    let status = false;
-    if (Date.now() >= expirationTime) {
-      status = true;
-    }
-    return status;
-  }
-};
+import AuthVerify from "./components/AuthVerify";
 
 function App() {
-  const navigate = useNavigate();
-
-  //auto logout feature
-  useEffect(() => {
-    if (!isTokenExpired()) {
-      localStorage.clear();
-      navigate("/");
-    }
-  }, []);
-
   return (
     <div>
       <CssBaseline />
       <BrowserRouter>
+        <AuthVerify />
         <Routes>
           <Route exact path="/" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
