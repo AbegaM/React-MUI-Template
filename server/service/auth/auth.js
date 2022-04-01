@@ -20,7 +20,7 @@ const signIn = async ({ data, query }) => {
 
   const token = await utils.generateToken(
     { id: user._id, email: user.email },
-    "1H"
+    "2M"
   );
   return {
     action: "send",

@@ -23,8 +23,8 @@ export default function Sidebar(props) {
   };
 
   const routes1 = [
-    { text: "Roles", to: "/roles" },
-    { text: "Users", to: "/users" },
+    { text: "Roles", to: "/role" },
+    { text: "Users", to: "/user" },
     { text: "Projects", to: "/project" },
   ];
 
@@ -36,7 +36,7 @@ export default function Sidebar(props) {
       <Divider />
       <List>
         {routes1.map((item, index) => (
-          <Link href={item.to}>
+          <Link href={item.to} underline="none" color="inherit">
             <ListItem button key={item.text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

@@ -31,11 +31,8 @@ export default function Signin() {
     const result = await api.signIn(userData);
     if (result.status === 200) {
       const token = result.data.data.token;
-      localStorage.setItem(
-        "scrumify-token",
-        JSON.stringify({ isAuthenticated: true, token })
-      );
-      navigate("/");
+      localStorage.setItem("scrumify-token", token);
+      navigate("/dashboard");
     } else {
       alert(result.data.message);
     }
