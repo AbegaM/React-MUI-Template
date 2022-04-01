@@ -22,11 +22,13 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="project" element={<Project />} />
-          <Route path="task" element={<Task />} />
-          <Route path="role" element={<Role />} />
-          <Route path="user" element={<User />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="project" element={<Project />} />
+            <Route path="task" element={<Task />} />
+            <Route path="role" element={<Role />} />
+            <Route path="user" element={<User />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

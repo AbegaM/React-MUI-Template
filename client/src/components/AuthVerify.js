@@ -11,7 +11,8 @@ export default function AuthVerify() {
       const token = bearerToken.split(" ")[1];
       const decodedToken = JSON.parse(atob(token.split(".")[1]));
       const expirationTime = decodedToken.exp * 1000 - 60000;
-      if (Date.now() >= expirationTime) {
+      if (Date.now() >= expirationTime) { 
+        localStorage.clear()
         navigate("/");
       }
     }
